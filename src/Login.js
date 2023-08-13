@@ -5,7 +5,7 @@ import axiosConfig from './axiosConfig';
 import axios from "axios";
 import qs from 'qs';
 
-function Login() {
+function Login({setLoginState}) {
 
     const [values, setValues] = useState({
         username : '',
@@ -37,16 +37,22 @@ function Login() {
                 data: qs.stringify(data),
                 url,
             };
-            axios(options).then(res => {
-                console.log("res : "+res.headers);
+            axios(options)
+            .then(res => {
+                console.log("res.headers : "+res.headers);
+                console.log("res : "+res.data.user);
+                setLoginState({
+                    name : res.data.user,
+                    loginStatus : true
+                });
                 navigate('/landing');
             })
-                .catch(e => {
-                    if(e.response.status===401) {
-                        errors.message = e.response.data.exception;
-                        setErrors(errors);
-                    }
-                });
+            .catch(e => {
+                if(e.response.status===401) {
+                    errors.message = e.response.data.exception;
+                    setErrors(errors);
+                }
+            });
         }
     }
 

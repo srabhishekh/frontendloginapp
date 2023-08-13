@@ -36,8 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-#navbarTogglerDemo02 > li:last-child
-{
-    float:right;
-}
