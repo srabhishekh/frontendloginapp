@@ -6,6 +6,7 @@ import Home from './Home';
 import Landing from './Landing';
 import Logout from './Logout';
 import RegSuccess from './RegSuccess';
+import Redirect from './Redirect';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/landing" element={<Landing fullName={props.name}/>} />
             <Route path="/regSuccess" element={<RegSuccess />} />
+            <Route path="/redirect" element={<Redirect setLoginState={setLoginState}/>} />
           </Routes>
         </div>
       </div>
