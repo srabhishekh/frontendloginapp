@@ -64,31 +64,53 @@ function Login({setLoginState}) {
                 });
             }
         } else {
-            var oauth2Endpoint = axiosConfig.defaults.googleAuthorizationURL;
-            
-            var form = document.createElement('form');
-            form.setAttribute('method', 'GET');
-            form.setAttribute('action', oauth2Endpoint);
+            // var oauth2Endpoint = axiosConfig.defaults.googleAuthorizationURL;
+            // //https://accounts.google.com/o/oauth2/v2/auth?response_type=code&
+            // //client_id=1023533150803-q081lnnf4tbqkaru13364kuguqf54ih7.apps.googleusercontent.com&
+            // //scope=openid%20profile%20email&
+            // //state=Bki2N_M-G3oy7-lrIsaFgAAgiXShJbi-_UIwlD-JxbI%3D&
+            // //redirect_uri=http://localhost:8080/login/oauth2/code/google&
+            // //nonce=RA2WRG4DsO5WyirGA3HASEqahn9Vlocv1emTj3HPOB8
+            // var form = document.createElement('form');
+            // form.setAttribute('method', 'GET');
+            // form.setAttribute('action', oauth2Endpoint);
 
-            var params = {'client_id': process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                            'redirect_uri': axiosConfig.defaults.redirectURL,
-                            'response_type': 'code',
-                            'scope': 'openid profile email',
-                            'include_granted_scopes': 'true',
-                            'state': 'pass-through value'};
+            // var params = {  'client_id': process.env.REACT_APP_GOOGLE_CLIENT_ID,
+            //                 'redirect_uri': axiosConfig.defaults.redirectURL,
+            //                 'response_type': 'code',
+            //                 'scope': process.env.REACT_APP_GOOGLE_SCOPE,
+            //                 'include_granted_scopes': 'true',
+            //                 'state': process.env.REACT_APP_GOOGLE_STATE,
+            //                 'prompt': process.env.REACT_APP_GOOGLE_PROMPT,
+            //                 'authuser': process.env.REACT_APP_GOOGLE_AUTHUSER
+            //             };
+            // for (var p in params) {
+            //     var input = document.createElement('input');
+            //     input.setAttribute('type', 'hidden');
+            //     input.setAttribute('name', p);
+            //     input.setAttribute('value', params[p]);
+            //     form.appendChild(input);
+            // }
 
-            for (var p in params) {
-                var input = document.createElement('input');
-                input.setAttribute('type', 'hidden');
-                input.setAttribute('name', p);
-                input.setAttribute('value', params[p]);
-                form.appendChild(input);
-            }
+            // document.body.appendChild(form);
+            // form.submit();
 
-            document.body.appendChild(form);
-            form.submit();
+            var oauth2Endpoint = axiosConfig.defaults.googleLoginURL;
+
+            window.location.assign(oauth2Endpoint);
+
+            // axios.get(oauth2Endpoint
+            //     // ,{
+            //     //     headers: {
+            //     //     'Access-Control-Allow-Origin': '*'
+            //     //     }
+            //     // }
+            //   ).then(response => {
+            //     console.log(response);
+            //   }).catch(e => {
+            //     console.log(e);
+            // });
         }
-        
     }
 
     // const [loginData, setLoginData] = useState(

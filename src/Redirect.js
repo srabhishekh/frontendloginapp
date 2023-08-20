@@ -14,11 +14,12 @@ function Redirect({setLoginState}) {
     })
 
     const url = axiosConfig.defaults.loginWithGoogleURL;
+    console.log("code : "+code)
     const data = {'code' : code};
     const options = {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        data: qs.stringify(data),
+        data: code,
         url,
     };
     axios(options)
