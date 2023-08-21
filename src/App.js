@@ -46,7 +46,7 @@ function App() {
         </nav>
         <div className="auth-wrapper">
           <Routes>
-            <Route exact path="/" element={<Home setLoginState={setLoginState}/>} />
+            <Route exact path="/" element={<Home values={{state:setLoginState, fullName:props.name}}/>} />
             <Route path="/login" element={<Login setLoginState={setLoginState}/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/landing" element={<Landing fullName={props.name}/>} />

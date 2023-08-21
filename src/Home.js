@@ -2,15 +2,20 @@ import React, {useState, useEffect} from 'react';
 import axiosConfig from './axiosConfig';
 import axios from 'axios';
 
-function Home({setLoginState}) {
+function Home({values}) {
 
   //var homeURL = axiosConfig.defaults.baseURL;
   
-  //var fillName = 'There'
+  //var fillName = 'There'\\
+
+  //console.log("fullName 1 : "+fullName);
 
   const [fullName, setValue] = useState('There');
+  //setValue('There');
+  console.log("fullName 1 : "+fullName);
 
   useEffect(() => {
+    console.log("Use effect : "+values);
     var homeURL = axiosConfig.defaults.baseURL;
     axios.get(homeURL
       ,{ withCredentials: true }
@@ -18,7 +23,7 @@ function Home({setLoginState}) {
         console.log(response);
         if (response.data.name) {
           setValue(response.data.name);
-          setLoginState({
+          values.state({
             name : response.data.name,
             loginStatus : true
           });
@@ -30,7 +35,7 @@ function Home({setLoginState}) {
 
   return (
     <div>
-        <h3>Hi {fullName}! Welcome to JIGIJIGI.com</h3>
+        <h3>Hi {values.fullName}! Welcome to JIGIJIGI.com</h3>
     </div>
   )
 }
