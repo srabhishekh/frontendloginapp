@@ -6,9 +6,7 @@ import axios from "axios";
 import qs from 'qs';
 
 function Login({setLoginState}) {
-
     
-
     const [values, setValues] = useState({
         username : '',
         password:''
@@ -30,38 +28,58 @@ function Login({setLoginState}) {
             setErrors(validation(values));
             if(errors.username==="" && errors.password==="") {
                 const url = axiosConfig.defaults.loginURL;
-                console.log(values);
-                const data = {'username' : values.username[0], 'password':values.password[0]};
-                const options = {
-                    method: 'POST',
-                    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-                    data: qs.stringify(data),
-                    url,
-                };
-                axios(options)
-                .then(res => {
-                    console.log("res.headers : "+res.headers);
-                    console.log("res : "+res.data.user);
-                    if (res.data.user) {
-                        setLoginState({
-                            name : res.data.user,
-                            loginStatus : true
-                        });
-                        navigate('/landing');
-                    } else {
-                        errors.message = 'Something went wrong, please try again later';
-                        setErrors(errors);
-                    }
-                })
-                .catch(e => {
-                    if(e.response.status===401) {
-                        errors.message = e.response.data.exception;
-                        setErrors(errors);
-                    } else {
-                        errors.message = e.message;
-                        setErrors(errors);
-                    }
-                });
+
+                var form = document.createElement('form');
+                form.setAttribute('method', 'POST');
+                form.setAttribute('action', url);
+
+                var params = {  'username': values.username[0],
+                                'password': values.password[0]
+                            };
+                for (var p in params) {
+                    var input = document.createElement('input');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', p);
+                    input.setAttribute('value', params[p]);
+                    form.appendChild(input);
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+
+
+                // console.log(values);
+                // const data = {'username' : values.username[0], 'password':values.password[0]};
+                // const options = {
+                //     method: 'POST',
+                //     headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                //     data: qs.stringify(data),
+                //     url,
+                // };
+                // axios(options)
+                // .then(res => {
+                //     console.log("res.headers : "+res.headers);
+                //     console.log("res : "+res.data.user);
+                //     if (res.data.user) {
+                //         setLoginState({
+                //             name : res.data.user,
+                //             loginStatus : true
+                //         });
+                //         navigate('/landing');
+                //     } else {
+                //         errors.message = 'Something went wrong, please try again later';
+                //         setErrors(errors);
+                //     }
+                // })
+                // .catch(e => {
+                //     if(e.response.status===401) {
+                //         errors.message = e.response.data.exception;
+                //         setErrors(errors);
+                //     } else {
+                //         errors.message = e.message;
+                //         setErrors(errors);
+                //     }
+                // });
             }
         } else {
             // var oauth2Endpoint = axiosConfig.defaults.googleAuthorizationURL;

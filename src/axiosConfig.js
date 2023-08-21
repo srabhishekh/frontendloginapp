@@ -9,5 +9,6 @@ export default axios.create({
     googleAuthorizationURL : "https://accounts.google.com/o/oauth2/v2/auth",
     redirectURL : "http://localhost:3000/redirect",
     googleLoginURL : "http://localhost:8080/oauth2/authorization/google",
-    headers : {"ngrok-skip-browser-warning":"true"}
+    headers : {"ngrok-skip-browser-warning":"true"},
+    withCredentials: true
 })

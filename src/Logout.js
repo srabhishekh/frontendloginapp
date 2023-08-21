@@ -14,6 +14,7 @@ function Logout({setLoginState}) {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             url,
+            withCredentials: true
         };
         axios(options)
         .then(res => {
